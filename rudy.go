@@ -98,12 +98,17 @@ func main() {
 	if path.Path == "" {
 		path.Path = "/"
 	}
+
+	if path.Scheme == "https" {
+		path.Host = path.Host + ":443"
+	}
+
 	var wg sync.WaitGroup
 	wg.Add(*t)
 	fmt.Println("[ + ] Attacking server...")
 	for i := 1; i <= *t; i++ {
 
-		go Attack(*t, *l, path.Path, path.Host, &wg)
+		//go Attack(*t, *l, path.Path, path.Host, &wg)
 
 	}
 	wg.Wait()
